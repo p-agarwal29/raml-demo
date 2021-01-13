@@ -1,0 +1,17 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  ID?: integer
+  fname: string
+  lname: string
+  loc: string
+  doj: string
+  ctc:
+    type: object
+    properties:
+      basic: integer
+      hra: integer
+      cvc: integer
+      sa: integer
+      pf: integer

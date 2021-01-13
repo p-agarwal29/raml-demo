@@ -1,0 +1,63 @@
+#%RAML 1.0
+title: demo1
+
+types:
+  EmployeeDataType: !include /dataTypes/EmployeeDataType.raml
+
+/emp:
+  get:
+    queryParameters:
+      loc:
+        required: false
+        enum:
+          - BLR
+          - DHL
+          - PUNE
+    responses:
+      200:    
+        body:
+          application/json:
+            type: EmployeeDataType[]
+            examples: 
+              output: !include example/EmployeeDataExampleArray.raml
+  post:
+    body:
+      application/json:
+        type: EmployeeDataType
+        examples:
+          input: !include /example/EmployeeDataNoIDExample.raml
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: "Data inserted"
+  /{ID}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: EmployeeDataType
+              examples: 
+                output: !include /example/EmployeeDataExample.raml
+    put:
+      body:
+        application/json:
+          type: EmployeeDataType
+          examples:
+            input: !include /example/EmployeeDataNoIDExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: "Record Updated Successfully"
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: "Record Deleted Successfully"
+          
